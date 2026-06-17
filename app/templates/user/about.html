@@ -1,0 +1,569 @@
+{% extends "user/base.html" %}
+{% block content %}
+{% load static %}
+<head>
+    <style>
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"
+                style="background-image: url({% static 'assets/images/shapes/page-header-shape-1.png' %});"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>About Us</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+        <!-- About One Start -->
+        <section class="about-one">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="about-one__left wow slideInLeft" data-wow-delay="100ms" data-wow-duration="2500ms">
+                            <div class="about-one__img-box">
+                                <div class="about-one__img">
+    <img src="{% static 'assets/images/resources/about-c-watch.png' %}" alt="">
+    </div>
+
+    <div class="about-one__shape-2 float-bob-y">
+        <img src="{% static 'assets/images/shapes/about-c-ac.png' %}" alt="">
+    </div>
+
+    <div class="about-one__shape-1">
+        <img src="{% static 'assets/images/shapes/about-one-shape-1.png' %}" alt="">
+    </div>
+
+    <div class="about-one__shape-4 float-bob-x">
+        <img src="{% static 'assets/images/shapes/about-one-shape-4.png' %}" alt="">
+    </div>
+
+    <div class="about-one__img-2">
+        <img src="{% static 'assets/images/resources/about-c-ac.png' %}" alt="">
+    </div>
+                                <div class="about-one__experience">
+                                    <div class="about-one__experience-count">
+                                        <h3 class="odometer" data-count="12">00</h3>
+                                        <span>+</span>
+                                    </div>
+                                    <p class="about-one__experience-text">Years of <br>Experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="about-one__right">
+                            <div class="section-title text-left sec-title-animation animation-style1">
+                                <div class="section-title__tagline-box">
+                                    <div class="section-title__tagline-shape">
+                                        <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                                    </div>
+                                    <span class="section-title__tagline">About FlipGears</span>
+                                </div>
+                                <h2 class="section-title__title title-animation">WELCOME TO FlipGears
+                                    ELECTRONICS REPAIR SERVICE</h2>
+                            </div>
+                            <p class="about-one__text-1">Committed to delivering fast, reliable, and affordable<br> electronic repair solutions.
+                            </p>
+                            <p class="about-one__text-2">FlipGears provides expert repair services for mobiles,
+                                laptops, TVs, ACs, and gadgets. We focus on quality, transparency,
+                                and fast service to keep your devices running like new.</p>
+                            <ul class="about-one__progress-box list-unstyled">
+                                <li>
+                                    <div class="about-one__progress">
+                                        <h4 class="about-one__progress-title">Repair Accuracy</h4>
+                                        <div class="bar">
+                                            <div class="bar-inner count-bar" data-percent="95%">
+                                                <div class="count-text">95%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="about-one__progress">
+                                        <h4 class="about-one__progress-title">Customer Satisfaction</h4>
+                                        <div class="bar">
+                                            <div class="bar-inner count-bar" data-percent="90%">
+                                                <div class="count-text">90%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="about-one__progress">
+                                        <h4 class="about-one__progress-title">On-Time Service</h4>
+                                        <div class="bar">
+                                            <div class="bar-inner count-bar" data-percent="92%">
+                                                <div class="count-text">92%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="about-one__btn-box-and-call-box">
+                                <div class="about-one__btn-box">
+                                    <a href="{% url 'about' %}" class="about-one__btn thm-btn">Read More<span
+                                            class="fas fa-arrow-right"></span></a>
+                                </div>
+                                <div class="about-one__call-box">
+                                    <div class="about-one__call-box-icon">
+                                        <span class="icon-call-2"></span>
+                                    </div>
+                                    <div class="about-one__call-box-content">
+                                        <p>Call Us Anytime</p>
+                                        <h4><a href="tel:15502505260">+91 6352182539</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About One End -->
+
+{% if request.session.log_id %}
+        <!-- Services One Start -->
+        <section class="services-one">
+            <div class="services-one__shape-1"></div>
+            <div class="services-one__shape-2"></div>
+            <div class="container">
+                <div class="section-title text-center sec-title-animation animation-style1">
+                    <div class="section-title__tagline-box justify-content-center">
+                        <div class="section-title__tagline-shape">
+                            <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                        </div>
+                        <span class="section-title__tagline">What We’re Offering</span>
+                    </div>
+                    <h2 class="section-title__title title-animation">Services We’re Provding <br> to Customers</h2>
+                </div>
+                <div class="row">
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-mobil"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'add_request' %}">Mobile Repair</a>
+                            </h3>
+                            <p class="services-one__text">Quick fixes for screen, battery, charging, and software issues using genuine parts.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="300ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-laptop"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'add_request' %}">Laptop Repair</a>
+                            </h3>
+                            <p class="services-one__text">Reliable solutions for hardware faults,
+                                OS issues, overheating, and performance upgrades.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="500ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-tv"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'add_request' %}">TV & AC Repair</a></h3>
+                            <p class="services-one__text">Expert repair for Smart TVs,
+                                LED/LCD panels, and ACs with long-lasting results.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="700ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-gadget"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'add_request' %}">Gadget Repair</a></h3>
+                            <p class="services-one__text">Precision repair for smartwatches,
+                                headphones, earbuds, and electronic accessories.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                </div>
+            </div>
+        </section>
+        <!-- Services One End -->
+
+
+{% else %}
+
+  <!-- Services One Start -->
+        <section class="services-one">
+            <div class="services-one__shape-1"></div>
+            <div class="services-one__shape-2"></div>
+            <div class="container">
+                <div class="section-title text-center sec-title-animation animation-style1">
+                    <div class="section-title__tagline-box justify-content-center">
+                        <div class="section-title__tagline-shape">
+                            <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                        </div>
+                        <span class="section-title__tagline">What We’re Offering</span>
+                    </div>
+                    <h2 class="section-title__title title-animation">Services We’re Provding <br> to Customers</h2>
+                </div>
+                <div class="row">
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="100ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-mobil"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'login' %}">Mobile Repair</a>
+                            </h3>
+                            <p class="services-one__text">Quick fixes for screen, battery, charging, and software issues using genuine parts.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInLeft" data-wow-delay="300ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-laptop"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'login' %}">Laptop Repair</a>
+                            </h3>
+                            <p class="services-one__text">Reliable solutions for hardware faults,
+                                OS issues, overheating, and performance upgrades.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="500ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-tv"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'login' %}">TV & AC Repair</a></h3>
+                            <p class="services-one__text">Expert repair for Smart TVs,
+                                LED/LCD panels, and ACs with long-lasting results.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                    <!--Services One Single Start-->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInRight" data-wow-delay="700ms"
+                         data-wow-duration="1500ms">
+                        <div class="services-one__single">
+                            <div class="services-one__single-shape-1"></div>
+                            <div class="services-one__single-shape-2"></div>
+                            <div class="services-one__single-shape-3"></div>
+                            <div class="services-one__count"></div>
+                            <div class="services-one__icon">
+                                <span class="mycon-gadget"></span>
+                            </div>
+                            <h3 class="services-one__title"><a href="{% url 'login' %}">Gadget Repair</a></h3>
+                            <p class="services-one__text">Precision repair for smartwatches,
+                                headphones, earbuds, and electronic accessories.</p>
+                        </div>
+                    </div>
+                    <!--Services One Single End-->
+                </div>
+            </div>
+        </section>
+        <!-- Services One End -->
+{% endif %}
+        <!-- Booking One Start -->
+        <section class="booking-one">
+            <div class="booking-one__wrap">
+                <div class="booking-one__bg"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-5">
+                            <div class="booking-one__left">
+                                <div class="booking-one__img wow slideInLeft" data-wow-delay="100ms"
+                                     data-wow-duration="2500ms">
+<img src="{% static 'assets/images/resources/booking-one-img-1.png' %}" alt="">
+                                </div>
+                                <div class="booking-one__shape-1 float-bob-x">
+<img src="{% static 'assets/images/shapes/booking-one-shape-1.png' %}" alt="">                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-7">
+                            <div class="booking-one__right wow slideInRight" data-wow-delay="100ms"
+                                 data-wow-duration="2500ms">
+                                <div class="booking-one__content">
+                                    <div class="booking-one__title-box">
+                                        <div class="booking-one__title-shape"
+style="background-image: url('{% static 'assets/images/shapes/book-one-title-shape-1.png' %}');">                                        </div>
+                                        <h3 class="booking-one__title">Book Repair Now</h3>
+                                    </div>
+                                    {% if request.session.log_id %}
+                                    <form class="booking-one__form"
+                                          action="{% url 'add_request' %}" method="post">{%csrf_token%}
+                                    {% else %}
+                                        <form class="booking-one__form"
+                                          action="{% url 'login' %}" method="post">{%csrf_token%}
+                                            {% endif %}
+                                        <div class="row">
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div class="booking-one__input-box">
+                                                    <p class="booking-one__input-title"> <span
+                                                            class="icon-pin-2"></span> Full Name</p>
+                                                    <div class="select-box">
+                                                        <input type="text" name="customer_name" class="selectmenu wide" placeholder="Enter Your Name" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div class="booking-one__input-box">
+                                                    <p class="booking-one__input-title"> <span
+                                                            class="icon-pin-2"></span>Mobile Number</p>
+                                                    <div class="select-box">
+                                                        <input type="text" name="mobile_number" class="selectmenu wide" placeholder="Enter Mobile Number" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div class="booking-one__input-box">
+                                                    <p class="booking-one__input-title"> <span class="icon-cuv"></span>
+                                                        Email Address</p>
+                                                    <div class="select-box">
+                                                          <input type="email" name="email" class="selectmenu wide" placeholder="Enter Your Email" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                             <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div class="booking-one__input-box">
+                                                    <p class="booking-one__input-title"> <span
+                                                            class="icon-pin-2"></span> City</p>
+                                                    <div class="select-box">
+                                                        <select class="selectmenu wide" name="city" required>
+                                                            <option value="" disabled selected>Choose Your City</option>
+                                                            <option>Ahemdabad</option>
+                                                            <option>Rajkot</option>
+                                                            <option>Surat</option>
+                                                            <option>Jamnagar</option>
+                                                            <option>Dwarka</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6 col-lg-6 col-md-6">
+                                                <div class="booking-one__input-box">
+                                                    <p class="booking-one__input-title"> <span
+                                                            class=""></span> Full Address</p>
+                                                    <div class="select-box">
+                                                        <input type="text" name="address" class="selectmenu wide" placeholder="Enter Your Address" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="booking-one__btn-box">
+                                                    <button type="submit" class="thm-btn">Book Now<span
+                                                            class="fas fa-arrow-right"></span></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="result"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Booking One End -->
+
+        <!-- Testimonial One Start -->
+        <section class="testimonial-one">
+            <div class="container">
+                <div class="section-title text-left sec-title-animation animation-style2">
+                    <div class="section-title__tagline-box">
+                        <div class="section-title__tagline-shape">
+                            <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                        </div>
+                        <span class="section-title__tagline">Our Testimonial</span>
+                    </div>
+                    <h2 class="section-title__title title-animation">What Peoples Say <br> about FlipGears</h2>
+                </div>
+
+
+<div class="testimonial-one__carousel owl-theme owl-carousel">
+
+    {% for f in feedbacks %}
+    <div class="item">
+        <div class="testimonial-one__single">
+
+            <div class="testimonial-one__client-info">
+
+                <!-- User Image -->
+                <div class="testimonial-one__img">
+                    <img src="{% static 'assets/images/enduser.jpg' %}" alt="">
+                </div>
+
+                <!-- User Name -->
+                <div class="testimonial-one__content">
+                    <h4 class="testimonial-one__client-name">
+                        {{ f.user.Name }}
+                    </h4>
+                    <p class="testimonial-one__sub-title">Customer</p>
+                </div>
+
+            </div>
+
+            <!-- Message -->
+            <p class="testimonial-one__text">
+                {{ f.message|truncatechars:120 }}
+            </p>
+
+            <!-- ⭐ Rating -->
+            <div class="testimonial-one__rating">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= f.rating %}
+                        <span class="icon-star"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="testimonial-one__quote">
+                <span class="icon-quote"></span>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+            </div>
+        </section>
+        <!-- Testimonial One End -->
+
+
+
+{% endblock %}

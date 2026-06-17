@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FlipGears Admin</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body {
+    background:#eef1f7;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* SIDEBAR */
+.sidebar {
+    height:100vh;
+    position:fixed;
+    width:240px;
+    background:#1f2937;
+    color:white;
+    padding:20px;
+}
+
+.sidebar h4 {
+    font-weight:600;
+    margin-bottom:25px;
+    color:#38bdf8;
+}
+
+.sidebar a {
+    display:block;
+    padding:10px 12px;
+    margin-bottom:8px;
+    color:#d1d5db;
+    text-decoration:none;
+    border-radius:8px;
+    transition:0.3s;
+}
+
+.sidebar a:hover {
+    background:#374151;
+    color:white;
+}
+
+/* CONTENT */
+.content {
+    margin-left:260px;
+    padding:25px;
+}
+
+/* CARDS */
+.card-box {
+    border-radius:12px;
+    padding:20px;
+    color:white;
+    font-weight:500;
+}
+
+.bg1 { background:#3b82f6; }
+.bg2 { background:#10b981; }
+.bg3 { background:#f59e0b; }
+.bg4 { background:#ef4444; }
+
+/* TABLE */
+.table-container {
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-top:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.05);
+    overflow-x:auto;
+}
+
+.table th {
+    background:#111827;
+    color:white;
+    font-size:14px;
+}
+
+.table td {
+    font-size:14px;
+    vertical-align:middle;
+}
+
+img {
+    border-radius:6px;
+}
+
+/* HEADINGS */
+.section-title {
+    margin-top:40px;
+    font-weight:600;
+    color:#111827;
+}
+
+/* BUTTONS */
+.btn-sm {
+    padding:4px 10px;
+    font-size:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+    <h4>FlipGears</h4>
+    <a href="#">Dashboard</a>
+    <a href="#products">Products</a>
+    <a href="#users">Users</a>
+    <a href="#orders">Orders</a>
+    <a href="#repairs">Repairs</a>
+</div>
+
+<!-- CONTENT -->
+
+<div class="content">
+
+<!-- STATS -->
+
+<div class="row">
+    <div class="col-md-3"><div class="card-box bg1">Products<br><h4>{{products|length}}</h4></div></div>
+    <div class="col-md-3"><div class="card-box bg2">Users<br><h4>{{users|length}}</h4></div></div>
+    <div class="col-md-3"><div class="card-box bg3">Orders<br><h4>{{orders|length}}</h4></div></div>
+    <div class="col-md-3"><div class="card-box bg4">Repairs<br><h4>{{repairs|length}}</h4></div></div>
+</div>
+
+<!-- PRODUCTS -->
+
+<h4 class="section-title" id="products">Products</h4>
+<div class="table-container">
+<table class="table table-hover">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Category</th><th>Image</th>
+<th>Price</th><th>Status</th><th>Views</th><th>Action</th>
+</tr>
+</thead>
+<tbody>
+{% for p in products %}
+<tr>
+<td>{{p.id}}</td>
+<td>{{p.name}}</td>
+<td>{{p.cat_id.catname}}</td>
+<td>{% if p.img %}<img src="{{p.img.url}}" width="50">{% endif %}</td>
+<td>₹{{p.price}}</td>
+<td>{{p.status}}</td>
+<td>{{p.views}}</td>
+<td>
+<a href="#" class="btn btn-warning btn-sm">Edit</a>
+<a href="#" class="btn btn-danger btn-sm">Delete</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<!-- USERS -->
+
+<h4 class="section-title" id="users">Users</h4>
+<div class="table-container">
+<table class="table table-hover">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Role</th><th>Photo</th>
+</tr>
+</thead>
+<tbody>
+{% for u in users %}
+<tr>
+<td>{{u.id}}</td>
+<td>{{u.Name}}</td>
+<td>{{u.Email}}</td>
+<td>{{u.Phone}}</td>
+<td>{{u.Role}}</td>
+<td>{% if u.photo %}<img src="{{u.photo.url}}" width="45">{% endif %}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<!-- ORDERS -->
+
+<h4 class="section-title" id="orders">Orders</h4>
+<div class="table-container">
+<table class="table table-hover">
+<thead>
+<tr>
+<th>ID</th><th>User</th><th>Total</th><th>Phone</th>
+<th>Payment</th><th>Status</th><th>Date</th>
+</tr>
+</thead>
+<tbody>
+{% for o in orders %}
+<tr>
+<td>{{o.id}}</td>
+<td>{{o.userid.Name}}</td>
+<td>₹{{o.final_total}}</td>
+<td>{{o.phone}}</td>
+<td>{{o.paymode}}</td>
+<td>{{o.orderstatus}}</td>
+<td>{{o.timestamp|date:"d M Y"}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+<!-- REPAIRS -->
+
+<h4 class="section-title" id="repairs">Repair Requests</h4>
+<div class="table-container">
+<table class="table table-hover">
+<thead>
+<tr>
+<th>ID</th><th>Name</th><th>Device</th><th>Brand</th>
+<th>Issue</th><th>City</th><th>Status</th><th>Date</th>
+</tr>
+</thead>
+<tbody>
+{% for r in repairs %}
+<tr>
+<td>{{r.id}}</td>
+<td>{{r.full_name}}</td>
+<td>{{r.device_name}}</td>
+<td>{{r.brand}}</td>
+<td>{{r.issue_type}}</td>
+<td>{{r.city}}</td>
+<td>{{r.status}}</td>
+<td>{{r.created_at|date:"d M Y"}}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+
+</div>
+
+</body>
+</html>

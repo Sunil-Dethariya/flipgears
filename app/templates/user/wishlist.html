@@ -1,0 +1,231 @@
+{% extends 'user\base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+<head>
+<style>
+
+/* 🔥 Wishlist Container */
+.wishlist-container {
+    padding: 20px;
+}
+
+/* 🔥 GRID FIX (IMPORTANT) */
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* 🔥 Card */
+.wishlist-card {
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: 0.3s;
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.wishlist-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 🔥 Image */
+.wishlist-card img {
+    height: 160px;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.wishlist-card img:hover {
+    transform: scale(1.05);
+}
+
+/* 🔥 Title */
+.wishlist-card h3 {
+    font-size: 16px;
+    margin: 10px 0 5px;
+}
+
+/* 🔥 Price */
+.wishlist-card p {
+    color: #007bff;
+    font-weight: bold;
+}
+
+/* 🔥 Buttons */
+.add-cart-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: black;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-cart-btn:hover {
+    background: #333;
+}
+
+.remove-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 6px 10px;
+    background: red;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: darkred;
+}
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Wishlist</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="wishlist-container">
+
+
+
+    <div class="wishlist-grid">
+        {% for item in wishlist_items %}
+
+        <div class="wishlist-card">
+            <a href="{% url 'single_page_product' item.productid.id %}">
+                <img src="{{ item.productid.img.url }}" alt="" style="transition:0.3s;">
+            </a>
+            <h3>{{ item.productid.name }}</h3>
+            <p>₹ {{ item.productid.price }}</p>
+
+            <a href="{% url 'add_to_cart' item.productid.id %}" class="add-cart-btn">
+                Add to Cart
+            </a>
+
+            <!-- ❌ Remove Button -->
+            <a href="{% url 'remove_wishlist' item.id %}" class="remove-btn">
+                Remove
+            </a>
+        </div>
+
+        {% empty %}
+        <div class="text-center py-5">
+            <p class="text-secondary">
+                No items in wishlist
+            </p>
+
+            <a href="{% url 'products' %}" class="btn btn-primary mt-3">
+                Start Shopping
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

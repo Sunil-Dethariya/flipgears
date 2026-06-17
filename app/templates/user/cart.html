@@ -1,0 +1,178 @@
+{% extends 'user/base.html' %}
+{% block content %}
+
+
+
+<head>
+    <style>
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Cart</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container mt-5">
+
+{% if cart_items %}
+
+<table class="table table-bordered text-center">
+    <thead class="table-dark">
+    <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Remove</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for item in cart_items %}
+    <tr>
+        <td><img src="{{ item.productid.img.url }}" width="60"></td>
+        <td>{{ item.productid.name }}</td>
+        <td>₹ {{ item.productid.price }}</td>
+
+        <td>
+            <a href="{% url 'decrease_qty' item.id %}"
+               class="btn btn-sm btn-danger">-</a>
+
+            <span class="mx-2">{{ item.quantity }}</span>
+
+            <a href="{% url 'increase_qty' item.id %}"
+               class="btn btn-sm btn-success">+</a>
+        </td>
+
+        <td>₹ {{ item.total_amount }}</td>
+
+        <td>
+            <a href="{% url 'remove_cart' item.id %}"
+               class="btn btn-sm btn-danger"
+               onclick="return confirm('Remove this item?')">
+               Remove
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-end align-items-center mt-3 gap-3">
+    <h4 class="mb-0">Grand Total: ₹ {{ grand_total }}</h4>
+    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">
+        Place Order
+    </a>
+</div>
+
+{% else %}
+
+<div class="text-center py-5">
+    <h4 class="text-muted">🛒 Your Cart is Empty</h4>
+    <p class="text-secondary">Looks like you haven’t added anything yet.</p>
+
+    <a href="{% url 'products' %}"
+       class="btn btn-primary mt-3">
+       Continue Shopping
+    </a>
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

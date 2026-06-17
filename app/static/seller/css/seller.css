@@ -1,0 +1,60 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin-top: 70px;
+  background: #F8F9FA;
+}
+
+/* Navbar */
+.seller-navbar {
+  background: #222222;
+}
+
+.seller-navbar .navbar-brand {
+  color: #00CFE0;
+}
+
+.seller-navbar span {
+  color: #ffffff;
+}
+
+.seller-navbar .nav-link {
+  color: #ffffff;
+  margin-left: 15px;
+}
+
+.seller-navbar .nav-link.active,
+.seller-navbar .nav-link:hover {
+  color: #00CFE0;
+}
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(to right, #00CFE0, #00b4c6);
+  color: white;
+  padding: 100px 0;
+}
+
+/* Features */
+.features-section {
+  padding: 60px 0;
+}
+
+.feature-box {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+/* CTA */
+.cta-section {
+  background: #ffffff;
+  padding: 60px 0;
+}
+
+/* Footer */
+.seller-footer {
+  background: #222222;
+  color: white;
+  padding: 15px 0;
+}

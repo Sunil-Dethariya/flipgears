@@ -1,0 +1,71 @@
+{% extends 'user/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+
+<h4 class="fw-bold mb-4">Order #{{ order.id }}</h4>
+
+<div class="card p-3 shadow-sm">
+
+<table class="table align-middle text-center">
+
+<thead class="table-dark">
+<tr>
+<th>Image</th>
+<th>Product</th>
+<th>Price</th>
+<th>Qty</th>
+<th>Total</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for item in order.orderitem_set.all %}
+<tr>
+
+<td>
+<img src="{{ item.product.img.url }}" width="70">
+</td>
+
+<td>{{ item.product.name }}</td>
+
+<td>₹{{ item.product.price }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>₹{{ item.price }}</td>
+
+<td>
+    {% if item.status == "Cancelled" %}
+        <span class="badge bg-danger">Cancelled</span>
+    {% else %}
+        <span class="badge bg-warning">{{ order.orderstatus }}</span>
+    {% endif %}
+</td>
+
+
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- 🔥 FULL ORDER CANCEL (ONLY IF MULTIPLE ITEMS) -->
+<div class="text-end mt-3">
+
+{% if order.orderitem_set.count >= 1 and order.orderstatus != "Cancelled" and order.orderstatus != "Delivered" %}
+<a href="{% url 'cancel_order' order.id %}" class="btn btn-danger">
+Cancel Full Order
+</a>
+{% endif %}
+
+</div>
+
+</div>
+
+{% endblock %}

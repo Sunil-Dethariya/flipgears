@@ -1,0 +1,217 @@
+{% extends 'seller/base.html' %}
+{% block content %}
+
+<style>
+
+/* TABLE IMAGE */
+.table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+</style>
+
+
+  <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Manage Order</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="{% url 'seller' %}">Home</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+<div class="container mt-4">
+
+<table class="table table-bordered text-center align-middle mt-3">
+
+<thead class="table-dark">
+<tr>
+<th>Order ID</th>
+<th>Products</th>
+<th>User</th>
+<th>Total</th>
+<th>Payment</th>
+<th>Status</th>
+<th>Update</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for order in orders %}
+
+<tr>
+
+<td>#{{ order.id }}</td>
+
+<!-- 🔥 PRODUCTS -->
+<td>
+        {% for item in order.orderitem_set.all %}
+
+    {% if item.product.seller.id == request.session.log_id %}
+
+        <div class="d-flex align-items-center gap-2 mb-2">
+
+            {% if item.product %}<a href="{% url 'order_detail_seller' order.id %}">
+                <img src="{{ item.product.img.url }}">
+
+                <span>{{ item.product.name }}</span>
+            </a>
+            {% else %}
+                <span>No Product</span>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+{% endfor %}
+</td>
+
+<td>{{ order.userid.Name }}</td>
+
+<td>₹{{ order.final_total }}</td>
+
+<td>{{ order.paymode }}</td>
+
+<td>
+    {% if order.orderstatus == "Placed" %}
+        <span class="badge bg-warning">Placed</span>
+    {% elif order.orderstatus == "Packed" %}
+        <span class="badge bg-info">Packed</span>
+    {% elif order.orderstatus == "Shipped" %}
+        <span class="badge bg-primary">Shipped</span>
+    {% elif order.orderstatus == "Delivered" %}
+        <span class="badge bg-success">Delivered</span>
+    {% elif order.orderstatus == "Cancelled" %}
+        <span class="badge bg-danger">Cancelled</span>
+    {% endif %}
+</td>
+
+<td>
+<form method="post" action="{% url 'update_order_status' order.id %}">
+{% csrf_token %}
+
+<select name="status" class="form-select form-select-sm mb-1">
+<option value="Packed">Packed</option>
+<option value="Shipped">Shipped</option>
+<option value="Delivered">Delivered</option>
+<option value="Cancelled">Cancel</option>
+</select>
+
+<button class="btn btn-sm btn-success w-100">
+Update
+</button>
+
+</form>
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+<td colspan="7">No Orders Found</td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+{% endblock %}

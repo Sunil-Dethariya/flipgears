@@ -1,0 +1,211 @@
+{% extends 'technician\base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<style>
+body{background:#f4f6f9}
+.card{border:none;border-radius:15px}
+
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+</style>
+
+
+  <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Request Details</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="{% url 'technician' %}">Home</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container py-4">
+
+<div class="row g-4">
+
+<!-- DETAILS -->
+<div class="col-md-8">
+<div class="card shadow-sm p-4">
+<h5><i class="fa fa-file-lines"></i> Repair Details</h5>
+<hr>
+
+<p><b>Name:</b> {{ repair.full_name }}</p>
+<p><b>Mobile:</b> {{ repair.mobile }}</p>
+<p><b>Device:</b> {{ repair.device_name }}</p>
+<p><b>Issue:</b> {{ repair.issue_description }}</p>
+
+<hr>
+
+<p><b>Address:</b><br>
+{{ repair.address }}, {{ repair.city }}
+</p>
+
+<!-- ACTION BUTTONS -->
+<div class="d-flex gap-2 mt-3">
+
+    <!-- 📍 MAP -->
+    <a href="https://www.google.com/maps/dir/?api=1&destination={{ repair.latitude }},{{ repair.longitude }}"
+       target="_blank"
+       class="btn btn-success">
+       <i class="fa fa-map-location-dot"></i> Navigate
+    </a>
+
+    <!-- 📞 CALL CUSTOMER -->
+   <a href="tel:{{ repair.mobile }}"
+   onclick="return confirm('Call customer now?')"
+   class="btn btn-primary">
+   <i class="fa fa-phone"></i> Call Customer
+   </a>
+
+</div>
+
+</div>
+</div>
+
+<!-- STATUS -->
+<div class="col-md-4">
+<div class="card shadow-sm p-4">
+<h5><i class="fa fa-gear"></i> Update Status</h5>
+<hr>
+<form method="POST" action="{% url 'update_request_status' repair.id %}">
+    {% csrf_token %}
+
+    <select class="form-select mb-3" name="status">
+        <option value="Assigned">Accepted</option>
+        <option value="Completed">Completed</option>
+    </select>
+
+    <button type="submit" class="btn btn-success w-100">
+        <i class="fa fa-check"></i> Update
+    </button>
+</form>
+
+
+<div class="text-success mt-3 d-none" id="successMsg">
+✔ Status Updated
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+function updateStatus(id){
+    const status = document.getElementById("status").value;
+
+    fetch("/technician/update-status/",{
+        method:"POST",
+        headers:{
+            "X-CSRFToken":"{{ csrf_token }}",
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:`repair_id=${id}&status=${status}`
+    })
+    .then(res=>res.json())
+    .then(res=>{
+        if(res.status==="success"){
+            document.getElementById("successMsg").classList.remove("d-none");
+            setTimeout(()=>{
+                window.location.href="/technician/dashboard/";
+            },1200);
+        }
+    });
+}
+</script>
+
+{% endblock %}

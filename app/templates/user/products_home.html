@@ -1,0 +1,330 @@
+{% extends 'user/base.html' %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<head>
+<style>
+
+/* ===============================
+   PRODUCT HEADER
+================================*/
+
+.product-topbar{
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+}
+
+.product-topbar .form-control,
+.product-topbar .form-select{
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.product-topbar button{
+    border-radius: 8px;
+    height: 42px;
+}
+
+/* ===============================
+   PRODUCT CARD
+================================*/
+
+.product-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    position: relative;
+}
+.product-card:hover {
+    transform: translateY(-6px);
+}
+
+.product-card img {
+    height: 280px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Wishlist icon */
+.product-card a.icon-heart {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    background: white;
+    padding: 6px 8px;
+    border-radius: 50%;
+    font-size: 18px;
+    color: red;
+    text-decoration: none;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+.product-card a.icon-heart:hover {
+    background: red;
+    color: white;
+}
+.product-card a.icon-heart.active {
+    background: red;
+    color: white;
+}
+
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Products</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container mt-5">
+
+    <!-- 🔥 FILTER BAR -->
+    <div class="product-topbar">
+        <form method="GET">
+            <div class="row align-items-center g-2">
+
+                <!-- Search -->
+                <div class="col-md-3">
+                    <input type="text" name="search"
+                           class="form-control"
+                           placeholder="Search products..."
+                           value="{{ request.GET.search }}">
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-2">
+                    <select name="category" class="form-select">
+                        <option value="">All Category</option>
+                        {% for cat in categories %}
+                        <option value="{{ cat.id }}"
+                        {% if request.GET.category == cat.id|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.catname }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Price -->
+                <div class="col-md-2">
+                    <select name="price" class="form-select">
+                        <option value="">Price</option>
+                        <option value="low" {% if request.GET.price == "low" %}selected{% endif %}>
+                            Low → High
+                        </option>
+                        <option value="high" {% if request.GET.price == "high" %}selected{% endif %}>
+                            High → Low
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Sort -->
+                <div class="col-md-2">
+                    <select name="sort" class="form-select">
+                        <option value="">Sort</option>
+                        <option value="latest" {% if request.GET.sort == "latest" %}selected{% endif %}>
+                            Latest
+                        </option>
+                        <option value="popular" {% if request.GET.sort == "popular" %}selected{% endif %}>
+                            Popular
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Button -->
+                <div class="col-md-2">
+                    <button class="btn btn-dark w-100">Apply</button>
+                </div>
+
+                <!-- Reset -->
+                <div class="col-md-1">
+                    <a href="" class="btn btn-light w-100">↺</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    {% if request.session.log_id %}
+    <!-- PRODUCT LIST -->
+    <div class="row">
+
+        {% for product in data %}
+        <div class="col-md-3 mb-4">
+            <div class="card product-card">
+
+                {% if product.img %}
+                <a href="{% url 'single_page_product' product.id %}">
+                    <img src="{{ product.img.url }}" class="card-img-top">
+                </a>
+
+                <a href="{% url 'add_to_wishlist' product.id %}"
+                   class="icon-heart {% if product.id in wishlist_ids %}active{% endif %}">
+                </a>
+                {% endif %}
+
+                <div class="card-body text-center">
+                    <h5>{{ product.name }}</h5>
+                    <p class="text-muted">{{ product.cat_id.catname }}</p>
+                    <h6 class="text-primary">₹ {{ product.price }}</h6>
+
+                    <a href="{% url 'add_to_cart' product.id %}"
+                       class="btn btn-dark btn-sm">
+                        Add to Cart
+                    </a>
+
+                    <a href="{% url 'buy_now' product.id %}"
+                       class="btn btn-success btn-sm">
+                        Buy Now
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <h4 class="text-center">No Products Available</h4>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+        <!-- PRODUCT LIST -->
+    <div class="row">
+
+        {% for product in data %}
+        <div class="col-md-3 mb-4">
+            <div class="card product-card">
+
+                {% if product.img %}
+                <a href="{% url 'login' %}">
+                    <img src="{{ product.img.url }}" class="card-img-top">
+                </a>
+
+                <a href="{% url 'login' %}"
+                   class="icon-heart {% if product.id in wishlist_ids %}active{% endif %}">
+                </a>
+                {% endif %}
+
+                <div class="card-body text-center">
+                    <h5>{{ product.name }}</h5>
+                    <p class="text-muted">{{ product.cat_id.catname }}</p>
+                    <h6 class="text-primary">₹ {{ product.price }}</h6>
+
+                    <a href="{% url 'login' %}"
+                       class="btn btn-dark btn-sm">
+                        Add to Cart
+                    </a>
+
+                    <a href="{% url 'login' %}"
+                       class="btn btn-success btn-sm">
+                        Buy Now
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+        <h4 class="text-center">No Products Available</h4>
+        {% endfor %}
+
+    </div>
+    {% endif%}
+
+</div>
+
+{% endblock %}

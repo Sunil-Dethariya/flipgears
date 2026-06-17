@@ -1,0 +1,416 @@
+{% extends 'user\base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+{% load static %}
+{% block content %}
+
+
+<head>
+
+    <style>
+
+/* All inputs placeholder */
+::placeholder {
+    color: black !important;
+    opacity: 1; /* important for full black */
+}
+
+/* For textarea also */
+textarea::placeholder {
+    color: black !important;
+}
+
+        /* ==============================
+   CONTACT INFO SECTION
+============================== */
+
+.contact-info{
+    padding:60px 0;
+    background:#f8f9fc;
+}
+
+.contact-info__single{
+    background:#fff;
+    padding:35px 25px;
+    border-radius:10px;
+    text-align:center;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+    transition:all 0.3s ease;
+}
+
+.contact-info__single:hover{
+    transform:translateY(-8px);
+    box-shadow:0 12px 30px rgba(0,0,0,0.15);
+}
+
+.contact-info__icon{
+    font-size:35px;
+    color:#00CFE0;
+    margin-bottom:15px;
+}
+
+.contact-info__single p{
+    color:#777;
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.contact-info__single h3{
+    font-size:18px;
+    font-weight:600;
+}
+
+.contact-info__single a{
+    text-decoration:none;
+    color:#111;
+}
+
+.contact-info__single a:hover{
+    color:#00CFE0;
+}
+
+
+/* ==============================
+   CONTACT PAGE
+============================== */
+
+.contact-page{
+    padding:80px 0;
+    background:#ffffff;
+}
+
+.contact-page__inner{
+    background:#f9fafc;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* MAP */
+
+.google-map__one{
+    width:100%;
+    height:450px;
+    border:0;
+    border-radius:10px;
+}
+
+
+/* FORM */
+
+.contact-page__form-title{
+    font-size:28px;
+    font-weight:700;
+    margin-bottom:25px;
+}
+
+.contact-page__input-box{
+    margin-bottom:20px;
+}
+
+.contact-page__input-box input,
+.contact-page__input-box textarea{
+    width:100%;
+    padding:14px 15px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size:14px;
+    outline:none;
+    transition:0.3s;
+}
+
+.contact-page__input-box input:focus,
+.contact-page__input-box textarea:focus{
+    border-color:#00CFE0;
+    box-shadow:0 0 0 2px rgba(13,110,253,0.15);
+}
+
+.contact-page__input-box textarea{
+    height:130px;
+    resize:none;
+}
+
+
+/* BUTTON */
+
+.thm-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 26px;
+    background:#00CFE0;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.thm-btn:hover{
+    background:#084cdf;
+}
+
+.thm-btn i{
+    font-size:14px;
+}
+
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width:991px){
+
+.contact-page__inner{
+    padding:25px;
+}
+
+.google-map__one{
+    height:350px;
+    margin-bottom:30px;
+}
+
+.contact-info__single{
+    margin-bottom:20px;
+}
+
+}
+
+
+
+
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+    </style>
+
+</head>
+
+
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Contact</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+
+        <!--Contact Info Start-->
+        <section class="contact-info">
+            <div class="container">
+                <div class="row">
+                    <!--Contact Two Single Start-->
+                    <div class="col-xl-3 col-lg-3 col-md-6" data-wow-delay="100ms">
+                        <div class="contact-info__single">
+                            <div class="contact-info__icon">
+                                <span class="icon-call"></span>
+                            </div>
+                            <p>Contact Us</p>
+                            <h3><a href="tel:558270575405">+55 827 057 5405</a></h3>
+                        </div>
+                    </div>
+                    <!--Contact Two Single End-->
+                    <!--Contact Two Single Start-->
+                    <div class="col-xl-3 col-lg-3 col-md-6" data-wow-delay="200ms">
+                        <div class="contact-info__single">
+                            <div class="contact-info__icon">
+                                <span class="icon-email"></span>
+                            </div>
+                            <p>Mail Us</p>
+                            <h3><a href="mailto:example@gamil.com">example@gamil.com</a></h3>
+                        </div>
+                    </div>
+                    <!--Contact Two Single End-->
+                    <!--Contact Two Single Start-->
+                    <div class="col-xl-3 col-lg-3 col-md-6" data-wow-delay="300ms">
+                        <div class="contact-info__single">
+                            <div class="contact-info__icon">
+                                <span class="icon-location"></span>
+                            </div>
+                            <p>Our Office Location</p>
+                            <h3>Ahemdavad</h3>
+                        </div>
+                    </div>
+                    <!--Contact Two Single End-->
+                    <!--Contact Two Single Start-->
+                    <div class="col-xl-3 col-lg-3 col-md-6" data-wow-delay="200ms">
+                        <div class="contact-info__single">
+                            <div class="contact-info__icon">
+                                <span class="icon-email"></span>
+                            </div>
+                            <p>Working Hours</p>
+                            <h3>10:00 AM TO 7:00 PM</h3>
+                        </div>
+                    </div>
+                    <!--Contact Two Single End-->
+                </div>
+            </div>
+        </section>
+        <!--Contact Info End-->
+
+        <!--Contact Page Start-->
+        <section class="contact-page">
+            <div class="container">
+                <div class="contact-page__inner">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="contact-page__right">
+                                <h3 class="contact-page__form-title">Get A Free Quote</h3>
+
+                                {% if request.session.log_id %}
+                                <form method="POST" action = "{% url 'freequote' %}" >{%csrf_token%}
+                                    {% else %}
+                                <form method="POST" action = "{% url 'login' %}" >{%csrf_token%}
+                                    {% endif%}
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="contact-page__input-box">
+                                                <input type="text" name="name" placeholder="Your name" required="">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="contact-page__input-box">
+                                                        <input type="email"
+                                                       class="form-control"
+                                                       name="email"
+                                                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                                       placeholder="Email"
+                                                       required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="contact-page__input-box">
+                                               <input type="tel"
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                               class="form-control"
+                                               name="mobile"
+                                               placeholder="Enter Number"
+                                               maxlength="10"
+                                               required>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-6 col-md-6">
+                                            <div class="contact-page__input-box">
+                                                <input type="text" placeholder="subject" name="subject">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <div class="contact-page__input-box text-message-box">
+                                                <textarea name="message" placeholder="Messege"></textarea>
+                                            </div>
+                                            <div class="contact-page__btn-box">
+                                                <button type="submit" class="thm-btn contact-page__btn"
+                                                    data-loading-text="Please wait...">
+                                                    <span class="thm-btn-text">Send A Message</span>
+                                                    <span class="thm-btn-icon-box"><i
+                                                            class="fas fa-arrow-right"></i></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <p class="ajax-response mb-0"></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="contact-page__left">
+                               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d376.16019428859624!2d72.54587885885223!3d23.012938955394805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sin!4v1773467675095!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Contact Page End-->
+
+{% endblock %}

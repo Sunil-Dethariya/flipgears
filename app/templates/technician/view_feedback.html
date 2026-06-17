@@ -1,0 +1,173 @@
+{% extends "technician/base.html" %}
+
+{% block content %}
+<style>
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+</style>
+
+
+  <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Feedback</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="{% url 'technician' %}">Home</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+<div class="container my-5">
+
+    <h3 class="fw-bold mb-4">Customer Feedback</h3>
+
+    {% if feedbacks %}
+
+        {% for f in feedbacks %}
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body">
+
+                <!-- Header -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        {{ f.user.Name }}
+                    </h5>
+                    <span class="badge bg-success">
+                        ⭐ {{ f.rating }}/5
+                    </span>
+                </div>
+
+                <!-- Device Info -->
+                {% if f.repair_request %}
+                    <span>
+                        Request ID: #{{ f.repair_request.id }}
+                    </span>
+                    {% endif %}
+                {% if f.repair_request %}
+                <p class="text-muted small mt-1 mb-2">
+                    {{ f.repair_request.device_name }} | {{ f.repair_request.brand }} {{ f.repair_request.model }}
+                </p>
+                {% endif %}
+
+                <!-- Message -->
+                <p class="mt-2">
+                    {{ f.message }}
+                </p>
+
+                <!-- Footer -->
+                <div class="d-flex justify-content-between small text-muted mt-3">
+                    <span>
+                        <i class="fa fa-calendar"></i>
+                        {{ f.created_at|date:"d M Y" }}
+                    </span>
+
+                    <form method="post" action="{% url 'delete_repair_feedback' f.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-danger"
+                            onclick="return confirm('Delete this feedback?')">
+                        Remove
+                    </button>
+                </form>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+    {% else %}
+
+        <div class="alert alert-info text-center">
+            No feedback available yet.
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,265 @@
+{% extends 'user/base.html' %}
+{% block content %}
+{% load static%}
+<style>
+
+                /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Order History</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container mt-5">
+
+{% if orders %}
+
+<table class="table table-bordered text-center align-middle">
+
+    <thead class="table-dark">
+    <tr>
+        <th>Order ID</th>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Feedback</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    {% for order in orders %}
+
+        {% for item in order.orderitem_set.all %}
+        <tr>
+
+            <td>#{{ order.id }}</td>
+
+            <td><a href="{% url 'order_detail' order.id %}">
+                <img src="{{ item.product.img.url }}" width="70">
+                </a>
+            </td>
+
+            <td>{{ item.product.name }}</td>
+
+            <td>₹ {{ item.product.price }}</td>
+
+            <td>{{ item.quantity }}</td>
+
+            <td>₹ {{ item.price }}</td>
+
+            <td>
+                {% if order.orderstatus == "Placed" %}
+                <span class="badge bg-warning">Placed</span>
+
+                {% elif order.orderstatus == "Packed" %}
+                <span class="badge bg-info">Packed</span>
+
+                {% elif order.orderstatus == "Shipped" %}
+                <span class="badge bg-primary">Shipped</span>
+
+                {% elif order.orderstatus == "Delivered" %}
+                <span class="badge bg-success">Delivered</span>
+
+                {% elif order.orderstatus == "Cancelled" %}
+                <span class="badge bg-danger">Cancelled</span>
+                {% endif %}
+            </td>
+
+            <td>
+                {% if order.orderstatus == "Delivered" %}
+                <a href="{% url 'give_feedback' item.product.id %}" class="btn btn-sm btn-success">
+                    Give Feedback
+                </a>
+                {% else %}
+                <span class="text-muted">Not Available</span>
+                {% endif %}
+            </td>
+
+        </tr>
+        {% endfor %}
+
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% else %}
+
+<div class="text-center py-5">
+    <h4 class="text-muted">📦 No Orders Yet</h4>
+    <p class="text-secondary">You haven't placed any orders.</p>
+
+    <a href="{% url 'products' %}" class="btn btn-primary mt-3">
+        Start Shopping
+    </a>
+</div>
+
+{% endif %}
+
+</div>
+
+
+        <!-- Testimonial One Start -->
+        <section class="testimonial-one">
+            <div class="container">
+                <div class="section-title text-left sec-title-animation animation-style2">
+                    <div class="section-title__tagline-box">
+                        <div class="section-title__tagline-shape">
+                            <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                        </div>
+                        <span class="section-title__tagline">Our Testimonial</span>
+                    </div>
+                    <h2 class="section-title__title title-animation">What Peoples Say <br> about FlipGears</h2>
+                </div>
+
+
+<div class="testimonial-one__carousel owl-theme owl-carousel">
+
+    {% for f in feedbacks %}
+    <div class="item">
+        <div class="testimonial-one__single">
+
+            <div class="testimonial-one__client-info">
+
+                <!-- User Image -->
+                <div class="testimonial-one__img">
+                    <img src="{% static 'assets/images/enduser.jpg' %}" alt="">
+                </div>
+
+                <!-- User Name -->
+                <div class="testimonial-one__content">
+                    <h4 class="testimonial-one__client-name">
+                        {{ f.user.Name }}
+                    </h4>
+                    <p class="testimonial-one__sub-title">Customer</p>
+                </div>
+
+            </div>
+
+            <!-- Message -->
+            <p class="testimonial-one__text">
+                {{ f.message|truncatechars:120 }}
+            </p>
+
+            <!-- ⭐ Rating -->
+            <div class="testimonial-one__rating">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= f.rating %}
+                        <span class="icon-star"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="testimonial-one__quote">
+                <span class="icon-quote"></span>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+            </div>
+        </section>
+        <!-- Testimonial One End -->
+
+{% endblock %}

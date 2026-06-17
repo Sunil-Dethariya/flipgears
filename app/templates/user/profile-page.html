@@ -1,0 +1,320 @@
+{% extends "user/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+<style>
+
+body{
+background:#f4f7fb;
+}
+
+/* Layout */
+
+.dashboard{
+display:flex;
+}
+
+/* Sidebar */
+
+.sidebar{
+width:240px;
+background:#131222;
+min-height:100vh;
+color:white;
+padding:20px;
+border-radius:15px;
+}
+
+.sidebar h4{
+color:#00E5FF;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+padding:10px;
+border-radius:10px;
+margin-bottom:8px;
+text-decoration:none;
+transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+background:#00E5FF;
+color:black;
+}
+
+/* Main Content */
+
+.main-content{
+flex:1;
+padding:20px;
+}
+
+/* Profile Card */
+
+.profile-card{
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 40px rgba(0,0,0,0.08);
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.profile-left{
+display:flex;
+align-items:center;
+gap:20px;
+}
+
+.profile-img{
+width:80px;
+height:80px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #00E5FF;
+}
+
+/* Cards */
+
+.card-box{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+text-align:center;
+transition:0.3s;
+}
+
+.card-box:hover{
+transform:translateY(-5px);
+}
+
+.btn-fg{
+background:#131222;
+color:white;
+border-radius:30px;
+padding:8px 15px;
+transition:0.3s;
+}
+
+.btn-fg:hover{
+background:#00E5FF;
+color:black;
+}
+
+
+.product-card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+}
+
+
+
+
+
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+</style>
+</head>
+
+  <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Profile</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container-fluid py-4">
+
+<div class="dashboard">
+
+<!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h4>FlipGears</h4>
+
+<a href="#" class="active">Dashboard</a> <a href="{% url 'order_history' %}">Orders</a> <a href="{% url 'cart' %}">Cart</a> <a href="{% url 'wishlist' %}">Wishlist</a> <a href="{% url 'view_repair_requests' %}">Repair Requests</a> <a href="{% url 'logout' %}">Logout</a>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main-content">
+
+<!-- PROFILE CARD -->
+
+<div class="profile-card mb-4">
+
+<div class="profile-left">
+
+{% if request.session.log_id %}
+
+
+<img src="{% static 'assets/images/enduser.jpg' %}" class="profile-img">
+{% endif %}
+
+
+<div>
+<h5>{{ request.session.log_name }}</h5>
+<p class="text-muted mb-0">{{ request.session.log_email }}</p>
+</div>
+
+</div>
+
+<a href="{% url 'edit_profile' %}" class="btn btn-fg">Edit Profile</a>
+
+</div>
+
+<!-- DASHBOARD CARDS -->
+
+<div class="row g-4">
+
+<div class="col-md-3">
+<div class="card-box">
+<h5>Orders</h5>
+<p>View your orders</p>
+<a href="{% url 'order_history' %}" class="btn btn-sm btn-fg">View</a>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card-box">
+<h5>Cart</h5>
+<p>Your cart items</p>
+<a href="{% url 'cart' %}" class="btn btn-sm btn-fg">View</a>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card-box">
+<h5>Wishlist ❤️</h5>
+<p>Saved products</p>
+<a href="{% url 'wishlist' %}" class="btn btn-sm btn-fg">View</a>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card-box">
+<h5>Repairs</h5>
+<p>Track requests</p>
+<a href="{% url 'view_repair_requests' %}" class="btn btn-sm btn-fg">View</a>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
+

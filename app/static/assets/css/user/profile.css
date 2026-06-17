@@ -1,0 +1,57 @@
+.nav-profile {
+    position: relative;
+}
+
+.dropdown-profile {
+    position: relative;
+    display: inline-block;
+
+}
+
+/* important: increase hover area */
+.dropdown-toggle {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;       /* no gap */
+    right: 0;
+    min-width: 200px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 999;
+}
+
+
+.dropdown-profile:hover{
+    background:#00CFE0;
+    border-radius:8px;
+    padding:5px 0px 5px 0px;
+}
+
+/* keep Login text hovered when cursor is inside dropdown */
+.nav-profile .dropdown-profile:hover .dropdown-toggle {
+    color: white;          /* jo hover color chahiye */
+    background: transparent; /* ya jo pehle tha */
+}
+
+/* 🔥 key line */
+.dropdown-profile:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: #f1f3f6;
+}
+

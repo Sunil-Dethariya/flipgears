@@ -1,0 +1,247 @@
+{% extends 'user\base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<head>
+    <style>
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Repair Request</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container my-5">
+
+
+    {% if requests %}
+    <div class="row g-4">
+        {% for r in requests %}
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 repair-card">
+                <div class="card-body">
+
+                    <div class="d-flex justify-content-between">
+                        <h5 class="fw-bold">{{ r.device_name }}</h5>
+                        <span class="badge
+                            {% if r.status == 'Pending' %} bg-warning
+                            {% elif r.status == 'In Progress' %} bg-info
+                            {% else %} bg-success {% endif %}">
+                            {{ r.status }}
+                        </span>
+                    </div>
+
+                    <p class="text-muted mb-1">
+                        {{ r.brand }} | {{ r.model }}
+                    </p>
+
+                    <p class="small mb-2">
+                        <strong>Issue:</strong> {{ r.issue_type }}
+                    </p>
+
+                    <p class="small text-muted">
+                        {{ r.issue_description|truncatechars:80 }}
+                    </p>
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between small text-muted">
+                        <span>
+                            <i class="fa fa-map-marker-alt"></i> {{ r.city }}
+                        </span>
+                        <span>
+                            <i class="fa fa-calendar"></i> {{ r.created_at|date:"d M Y" }}
+                        </span>
+                    </div>
+
+                    {% if r.technician %}
+                    <div class="mt-2 small text-success">
+                        <i class="fa fa-user-cog"></i>
+                        Technician: {{ r.technician.username }}
+                    </div>
+                    {% endif %}
+                    {% if r.status == "Completed" %}
+                    <div class="mt-3 text-end">
+                        <a href="{% url 'give_repair_feedback' r.id %}" class="btn btn-sm btn-success">
+                            Give Feedback
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+        <div class="alert alert-info">
+            No repair requests found.
+        </div>
+    {% endif %}
+</div>
+
+
+
+        <!-- Testimonial One Start -->
+        <section class="testimonial-one">
+            <div class="container">
+                <div class="section-title text-left sec-title-animation animation-style2">
+                    <div class="section-title__tagline-box">
+                        <div class="section-title__tagline-shape">
+                            <img src="{% static 'assets/images/removelogo.png' %}" alt="">
+                        </div>
+                        <span class="section-title__tagline">Our Testimonial</span>
+                    </div>
+                    <h2 class="section-title__title title-animation">What Peoples Say <br> about FlipGears</h2>
+                </div>
+
+
+<div class="testimonial-one__carousel owl-theme owl-carousel">
+
+    {% for f in feedbacks %}
+    <div class="item">
+        <div class="testimonial-one__single">
+
+            <div class="testimonial-one__client-info">
+
+                <!-- User Image -->
+                <div class="testimonial-one__img">
+                    <img src="{% static 'assets/images/enduser.jpg' %}" alt="">
+                </div>
+
+                <!-- User Name -->
+                <div class="testimonial-one__content">
+                    <h4 class="testimonial-one__client-name">
+                        {{ f.user.Name }}
+                    </h4>
+                    <p class="testimonial-one__sub-title">Customer</p>
+                </div>
+
+            </div>
+
+            <!-- Message -->
+            <p class="testimonial-one__text">
+                {{ f.message|truncatechars:120 }}
+            </p>
+
+            <!-- ⭐ Rating -->
+            <div class="testimonial-one__rating">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= f.rating %}
+                        <span class="icon-star"></span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+            <div class="testimonial-one__quote">
+                <span class="icon-quote"></span>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+            </div>
+        </section>
+        <!-- Testimonial One End -->
+
+{% endblock %}

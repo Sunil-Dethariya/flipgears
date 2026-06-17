@@ -1,0 +1,576 @@
+{% extends 'user\base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+<head>
+    <style>
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Customization</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+
+<div class="container py-5">
+<div class="card p-4 shadow">
+
+<form method="POST" action="{% url 'add_customizations_request' %}" enctype="multipart/form-data" onsubmit="return validateForm()">
+{% csrf_token %}
+
+
+<!-- STEPPER -->
+<div class="stepper">
+    <div class="step active" id="step-1">
+        <div class="step-circle">1</div>
+        <p>Personal</p>
+    </div>
+    <div class="step" id="step-2">
+        <div class="step-circle">2</div>
+        <p>Device</p>
+    </div>
+    <div class="step" id="step-3">
+        <div class="step-circle">3</div>
+        <p>Address</p>
+    </div>
+    <div class="step" id="step-4">
+        <div class="step-circle">4</div>
+        <p>Payment</p>
+    </div>
+</div>
+
+
+<!-- STEP 1 -->
+<div class="form-step active">
+<h4>Personal Details</h4>
+<div class="row g-3">
+    <div class="col-md-6">
+        <input class="form-control"
+       name="full_name"
+       placeholder="Full Name"
+       pattern="[A-Za-z ]+"
+       required>
+    </div>
+    <div class="col-md-6">
+        <input type="tel"
+       class="form-control"
+       name="mobile"
+       placeholder="Mobile Number"
+       maxlength="10"
+       pattern="[0-9]{10}"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+       required>
+    </div>
+    <div class="col-md-6">
+        <input type="email"
+       class="form-control"
+       name="email"
+       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+       placeholder="Email"
+       required>
+    </div>
+    <div class="col-md-6">
+<select class="form-control" name="gender" required>
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+</select>
+    </div>
+</div>
+<div class="d-flex justify-content-between mt-4">
+    <a href="/" class="btn btn-outline-danger btn-rounded">Cancel</a>
+   <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+{% if request.session.selected_product == "mobile" %}
+
+<!-- STEP 2 -->
+<div class="form-step">
+<h4>Device Details</h4>
+<div class="row g-3">
+   <div class="col-md-6">
+    <select class="form-control" name="physical_cust" id="physicalCust" onchange="handlePhysicalChange()" required>
+        <option>Physical Customization</option>
+        <option>Phone Cover / Case</option>
+        <option>Screen Protection & Look</option>
+        <option>Stickers & Skins</option>
+        <option>Accessories Add-ons</option>
+        <option>None</option>
+        <option>Other</option>
+    </select>
+</div>
+
+<!-- Upload Field (Hidden by default) -->
+<div class="col-md-6" id="uploadField" style="display: none;">
+    <label>Upload Photo</label>
+    <input type="file" class="form-control" name="cover_image" accept="image/*">
+</div>
+
+<!-- Upload Field (Hidden by default) -->
+<div class="col-md-6" id="otherField" style="display: none;">
+    <label>Other Customization</label>
+    <input type="text" class="form-control" name="physical_other_cust" >
+</div>
+
+    <div class="col-md-6">
+        <select class="form-control" name="software_cust" id="softwareCust" onchange="handlesoftwareChange()" required>
+            <option>Software Customization</option>
+            <option>Home Screen Design</option>
+            <option>Apps for Customization</option>
+            <option>None</option>
+            <option>Other</option>
+        </select>
+    </div>
+    <!-- Upload Field (Hidden by default) -->
+    <div class="col-md-6" id="othersoftwareField" style="display: none;">
+        <label>Other Customization</label>
+        <input type="text" class="form-control" name="software_other_cust" >
+    </div>
+    <div class="col-12">
+        <textarea class="form-control" name="Customization description" placeholder="Customization Description" required></textarea>
+    </div>
+</div>
+<div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+   <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+
+{% elif request.session.selected_product == "laptop" %}
+
+
+ <!-- STEP 2 -->
+<div class="form-step">
+<h4>Device Details</h4>
+<div class="row g-3">
+   <div class="col-md-6">
+    <select class="form-control" name="physical_cust" id="laptopphysicalCust" onchange="handlelaptopPhysicalChange()" required>
+        <option>Physical Customization</option>
+        <option>Laptop Skin / Cover</option>
+        <option>Screen Protection</option>
+        <option>RGB Lighting</option>
+        <option>Accessories Add-ons</option>
+        <option>None</option>
+        <option>Other</option>
+    </select>
+</div>
+
+<!-- Upload Field (Hidden by default) -->
+<div class="col-md-6" id="laptopuploadField" style="display: none;">
+    <label>Upload Photo</label>
+    <input type="file" class="form-control" name="cover_image" accept="image/*" >
+</div>
+
+<!-- Upload Field (Hidden by default) -->
+<div class="col-md-6" id="otherlaptopField" style="display: none;">
+    <label>Other Customization</label>
+    <input type="text" class="form-control" name="physical_other_cust" >
+</div>
+
+    <div class="col-md-6">
+        <select class="form-control" name="software_cust" id="laptopsoftwareCust" onchange="handlelaptopsoftwareChange()" required>
+            <option>Software Customization</option>
+            <option>UI Customization</option>
+            <option>Performance Optimization</option>
+            <option>Software Installation</option>
+            <option>None</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <!-- text Field (Hidden by default) -->
+    <div class="col-md-6" id="otherlaptopsoftwareField" style="display: none;">
+        <label>Other Customization</label>
+        <input type="text" class="form-control" name="software_other_cust" >
+    </div>
+
+    <div class="col-12">
+        <textarea class="form-control" name="Customization description" placeholder="Customization Description" required></textarea>
+    </div>
+</div>
+<div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+   <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+    {% else %}
+     <h1>by</h1>
+      {% endif %}
+
+<!-- STEP 3-->
+<div class="form-step">
+<h4>Address & Location</h4>
+<div class="row g-3">
+    <div class="col-12"><input class="form-control" name="address" placeholder="Address Line 1" required></div>
+    <div class="col-md-4">
+        <input class="form-control"
+       name="city"
+       placeholder="City"
+       pattern="[A-Za-z ]+"
+       required>
+    </div>
+    <div class="col-md-4">
+        <input class="form-control"
+       name="state"
+       placeholder="State"
+       pattern="[A-Za-z ]+"
+       required>
+    </div>
+    <div class="col-md-4">
+        <input class="form-control"
+       name="pincode"
+       placeholder="Pincode"
+       maxlength="6"
+       pattern="[0-9]{6}"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+       required>
+    </div>
+</div>
+<input type="hidden" name="latitude" id="latitude">
+<input type="hidden" name="longitude" id="longitude">
+<button type="button" class="btn btn-outline-primary mt-3" onclick="getLocation()">
+    <i class="fa fa-location-dot"></i> Use Current Location
+</button>
+<p id="gpsStatus" class="text-success mt-2"></p>
+
+<div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+    <button type="button" class="btn btn-primary" onclick="nextStep()">Next</button>
+</div>
+</div>
+
+<!-- STEP 4 -->
+<div class="form-step">
+<h4>Payment</h4>
+<div class="border p-3 rounded">
+    <input type="radio" checked required> Cash on Delivery
+    <h5 class="mt-3">Service Charges: ₹299</h5>
+</div>
+<div class="d-flex justify-content-between mt-4">
+    <button type="button" class="btn btn-secondary" onclick="prevStep()">Previous</button>
+    <button type="submit" class="btn btn-success btn-rounded">
+    Confirm Booking
+</button>
+
+</div>
+</div>
+
+    </form>
+
+<!-- SUCCESS -->
+<div class="success-box" id="successBox">
+    <div class="checkmark"><i class="fa fa-check-circle"></i></div>
+    <h3>Booking Confirmed!</h3>
+    <p>Technician will contact you soon</p>
+    <a href="{% url 'add_request' %}" class="btn btn-primary btn-rounded mt-3">OK</a>
+</div>
+
+</div>
+</div>
+
+
+<script>
+function handlePhysicalChange() {
+    let selected = document.getElementById("physicalCust").value;
+
+    let uploadField = document.getElementById("uploadField");
+    let otherField = document.getElementById("otherField");
+
+    // Reset both fields
+    uploadField.style.display = "none";
+    otherField.style.display = "none";
+
+    if (selected === "Phone Cover / Case") {
+        uploadField.style.display = "block";
+    }
+    else if (selected === "Other") {
+        otherField.style.display = "block";
+    }
+}
+
+function handlesoftwareChange() {
+    let selected = document.getElementById("softwareCust").value;
+    let othersoftwareField = document.getElementById("othersoftwareField");
+
+    // Reset fields
+    othersoftwareField.style.display = "none";
+
+    if (selected === "Other") {
+        othersoftwareField.style.display = "block";
+    }
+    else{
+        othersoftwareField.style.display = "none";
+    }
+}
+
+
+function handlelaptopPhysicalChange() {
+    let selected = document.getElementById("laptopphysicalCust").value;
+
+    let laptopuploadField = document.getElementById("laptopuploadField");
+    let otherlaptopField = document.getElementById("otherlaptopField");
+
+    // Reset both fields
+    laptopuploadField.style.display = "none";
+    otherlaptopField.style.display = "none";
+
+    if (selected === "Laptop Skin / Cover") {
+        laptopuploadField.style.display = "block";
+    }
+    else if (selected === "Other") {
+        otherlaptopField.style.display = "block";
+    }
+}
+
+function handlelaptopsoftwareChange() {
+    let selected = document.getElementById("laptopsoftwareCust").value;
+    let otherlaptopsoftwareField = document.getElementById("otherlaptopsoftwareField");
+
+    // Reset fields
+    otherlaptopsoftwareField.style.display = "none";
+
+    if (selected === "Other") {
+        otherlaptopsoftwareField.style.display = "block";
+    }
+    else{
+        otherlaptopsoftwareField.style.display = "none";
+    }
+}
+</script>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll(".form-step");
+
+function nextStep() {
+    const currentForm = steps[currentStep];
+    const inputs = currentForm.querySelectorAll("input, select, textarea");
+
+    let valid = true;
+
+    inputs.forEach(input => {
+
+        // 🔴 EMPTY CHECK
+        if (input.hasAttribute("required") && input.value.trim() === "") {
+            input.style.border = "2px solid red";
+            valid = false;
+            return;
+        }
+
+        // 📱 MOBILE
+        if (input.name === "mobile") {
+            if (!/^[0-9]{10}$/.test(input.value)) {
+                alert("Mobile must be 10 digits");
+                input.style.border = "2px solid red";
+                valid = false;
+                return;
+            }
+        }
+
+        // 📧 EMAIL
+        if (input.name === "email") {
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)) {
+                alert("Invalid email");
+                input.style.border = "2px solid red";
+                valid = false;
+                return;
+            }
+        }
+
+        // 📮 PINCODE
+        if (input.name === "pincode") {
+            if (!/^[0-9]{6}$/.test(input.value)) {
+                alert("Pincode must be 6 digits");
+                input.style.border = "2px solid red";
+                valid = false;
+                return;
+            }
+        }
+
+        // 🔤 NAME / CITY / STATE
+        if (["full_name","city","state"].includes(input.name)) {
+            if (!/^[A-Za-z ]+$/.test(input.value)) {
+                alert("Only letters allowed");
+                input.style.border = "2px solid red";
+                valid = false;
+                return;
+            }
+        }
+
+        // ✅ VALID
+        input.style.border = "";
+    });
+
+    if (!valid) return;
+
+    steps[currentStep].classList.remove("active");
+    currentStep++;
+    steps[currentStep].classList.add("active");
+
+    updateStepper();
+}
+
+function prevStep() {
+    steps[currentStep].classList.remove("active");
+    currentStep--;
+    steps[currentStep].classList.add("active");
+
+    updateStepper();
+}
+
+function updateStepper() {
+    const stepIndicators = document.querySelectorAll(".step");
+    stepIndicators.forEach((step, index) => {
+        step.classList.toggle("active", index === currentStep);
+    });
+}
+
+// 🔥 REAL-TIME INPUT CONTROL
+document.addEventListener("input", function(e) {
+    if (e.target.name === "mobile" || e.target.name === "pincode") {
+        e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    }
+
+    if (["full_name","city","state"].includes(e.target.name)) {
+        e.target.value = e.target.value.replace(/[^A-Za-z ]/g, '');
+    }
+});
+</script>
+<script>
+let locationFetched = false;
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                // Success
+                document.getElementById("latitude").value = position.coords.latitude;
+                document.getElementById("longitude").value = position.coords.longitude;
+
+                locationFetched = true;
+
+                alert("Location fetched successfully!");
+            },
+            function(error) {
+                // Error (Permission denied or other issue)
+                alert("Please allow location permission to continue.");
+                locationFetched = false;
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+</script>
+<script>
+function validateForm() {
+    if (!locationFetched) {
+        alert("Please click 'Use Current Location' and allow permission.");
+        return false; // stop form submit
+    }
+    return true;
+}
+</script>
+
+{% endblock %}

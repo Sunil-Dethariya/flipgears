@@ -1,0 +1,229 @@
+{% extends 'seller/base.html' %}
+
+{% block title %}FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+
+    <style>
+        body {
+            background: #f5f6fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .product-card {
+            max-width: 600px;
+            margin: 60px auto;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            padding: 30px;
+        }
+
+        .product-card h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #34495e;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: none;
+        }
+
+        .btn-submit {
+            background: #0d6efd;
+            border: none;
+            padding: 12px;
+            font-weight: 500;
+            border-radius: 8px;
+        }
+
+        .btn-submit:hover {
+            background: #084298;
+        }
+
+/* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+
+</style>
+
+
+  <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Add Product</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="{% url 'seller' %}">Home</a></li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+<div class="product-card">
+    <h2>Add New Product</h2>
+
+    <form action="{% url 'add_product' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- Product Name -->
+        <div class="mb-3">
+            <label class="form-label">Product Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter product name" required>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+            <label class="form-label">Product Type</label>
+            <select name="catid" class="form-select" required>
+                <option value="">-- Select Product Type --</option>
+                {% for cat in data %}
+                <option value = "{{cat.id}}">{{cat.catname}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- add product -->
+        <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select name="catname" class="form-select" required>
+                <option value="">-- Select Category Type --</option>
+                <option value = "Mobile">Mobile</option>
+                <option value = "Earbuds">Earbuds</option>
+                <option value = "Watches">Watches</option>
+                <option value = "Headphone">Headphone</option>
+                <option value = "Other Accessories">Other Accessories</option>
+            </select>
+        </div>
+
+        <!-- Image -->
+        <div class="mb-3">
+            <label class="form-label">Product Image</label>
+            <input type="file" name="img" class="form-control" required>
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type="number" step="0.01" name="price" class="form-control" placeholder="₹ Price" required>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="desc" class="form-control" rows="4" placeholder="Product description"></textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="mb-4">
+            <label class="form-label">Status</label>
+            <select name="status" class="form-select">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+
+        <!-- Submit -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-submit text-white">Save Product</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

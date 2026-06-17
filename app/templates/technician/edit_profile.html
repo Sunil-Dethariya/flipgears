@@ -1,0 +1,212 @@
+{% extends "technician/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+body{
+background:#f4f7fb;
+}
+
+/* Container */
+
+.edit-box{
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 20px 60px rgba(0,0,0,0.08);
+}
+
+/* Profile image */
+
+.profile-img{
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid #00E5FF;
+}
+
+/* Button */
+
+.btn-fg{
+background:#131222;
+color:white;
+border-radius:30px;
+padding:10px 20px;
+transition:0.3s;
+}
+
+.btn-fg:hover{
+background:#00E5FF;
+color:black;
+}
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Edit Profile</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="{% url 'technician' %}">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+<div class="container py-5">
+
+<div class="row justify-content-center">
+
+<div class="col-md-6">
+
+<div class="edit-box">
+
+<h4 class="mb-4 text-center">Edit Profile</h4>
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<div class="text-center mb-4">
+
+
+<img src="{% static 'assets/images/enduser.jpg' %}" class="profile-img">
+
+</div>
+
+<div class="mb-3">
+<label>Name</label>
+<input type="text" name="name" value="{{ user.Name }}"
+       class="form-control"
+       required
+       pattern="[A-Za-z ]+"
+       onkeypress="return /[a-zA-Z ]/.test(event.key)">
+</div>
+
+<div class="mb-3">
+<label>Email</label>
+<input type="email" name="email" value="{{ user.Email }}"
+       class="form-control"
+       required
+       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+       title="Enter valid email (example@gmail.com)">
+</div>
+
+<div class="mb-3">
+<label>Phone</label>
+<input type="text" name="phone" value="{{ user.Phone }}"
+       class="form-control"
+       required
+       maxlength="10"
+       pattern="[0-9]{10}"
+       title="Enter 10 digit phone number"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+</div>
+
+
+<div class="d-flex justify-content-between">
+
+<a href="{% url 'profile' %}" class="btn btn-secondary">Cancel</a>
+
+<button type="submit" class="btn btn-fg">Update Profile</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

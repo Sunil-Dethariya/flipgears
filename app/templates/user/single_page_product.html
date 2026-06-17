@@ -1,0 +1,221 @@
+{% extends 'user\base.html' %}
+
+{% block title %}{{ product.name }} | FlipGears{% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+
+<style>
+
+body{
+background:#f5f7fb;
+}
+
+
+/* FlipGears Theme */
+
+:root{
+--primary:#00E5FF;
+--dark:#131222;
+}
+
+/* Main Container */
+
+.product-wrapper{
+background:white;
+border-radius:20px;
+padding:40px;
+box-shadow:0 20px 60px rgba(0,0,0,0.08);
+}
+
+/* Product Image */
+
+.product-img{
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.product-img img{
+width:100%;
+transition:0.5s;
+}
+
+.product-img:hover img{
+transform:scale(1.1);
+}
+
+/* Category */
+
+.category{
+background:var(--primary);
+padding:6px 15px;
+border-radius:30px;
+font-size:13px;
+font-weight:600;
+display:inline-block;
+}
+
+/* Price */
+
+.price{
+font-size:32px;
+font-weight:700;
+color:var(--primary);
+}
+
+/* Buttons */
+
+.btn-cart{
+background:var(--dark);
+color:white;
+border-radius:40px;
+padding:12px 28px;
+border:none;
+transition:0.3s;
+}
+
+.btn-cart:hover{
+background:var(--primary);
+color:black;
+}
+
+.btn-buy{
+background:var(--primary);
+color:black;
+border-radius:40px;
+padding:12px 28px;
+border:none;
+margin-left:10px;
+}
+
+.btn-buy:hover{
+background:#00c8e0;
+}
+
+.btn-wishlist{
+border:2px solid var(--primary);
+border-radius:40px;
+padding:10px 20px;
+background:white;
+margin-left:10px;
+}
+
+.btn-wishlist:hover{
+background:var(--primary);
+}
+
+/* Info Box */
+
+.product-info{
+background:#f9fbff;
+border-radius:12px;
+padding:15px;
+margin-top:20px;
+}
+
+</style>
+
+
+
+<div class="container my-5">
+
+<div class="product-wrapper">
+
+<div class="row g-5">
+
+<!-- LEFT SIDE IMAGE -->
+
+<div class="col-lg-6">
+
+<div class="product-img">
+
+{% if product.img %} <img src="{{ product.img.url }}" alt="{{ product.name }}">
+{% else %} <img src="{% static 'assets/images/no-image.png' %}">
+{% endif %}
+
+</div>
+
+</div>
+
+<!-- RIGHT SIDE DETAILS -->
+
+<div class="col-lg-6">
+
+<span class="category">
+
+{{ product.cat_id.catname }}
+
+</span>
+
+<h2 class="mt-3">
+
+{{ product.name }}
+
+</h2>
+
+<div class="price mt-3">
+
+₹ {{ product.price }}
+
+</div>
+
+<p class="text-muted mt-3">
+
+{{ product.desc }}
+
+</p>
+
+<!-- EXTRA INFO -->
+
+<div class="product-info">
+
+<p><b>Category :</b> {{ product.cat_id.catname }}</p>
+
+<p><b>Status :</b> {{ product.status }}</p>
+
+<p><b>Delivery :</b> Free Delivery Available</p>
+
+<p><b>Return :</b> 7 Day Return Policy</p>
+
+
+
+<!-- BUTTONS -->
+
+<div class="mt-4">
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn btn-cart">
+
+Add To Cart
+
+</a>
+
+<a href="{% url 'buy_now' product.id %}" class="btn btn-buy">
+
+Buy Now
+
+</a>
+
+<a href="{% url 'add_to_wishlist' product.id %}" class="btn btn-wishlist">
+
+❤️ Wishlist
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+{% endblock %}

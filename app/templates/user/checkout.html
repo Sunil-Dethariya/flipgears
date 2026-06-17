@@ -1,0 +1,192 @@
+{% extends 'user/base.html' %}
+{% block content %}
+
+
+
+<head>
+    <style>
+
+        /* ===============================
+   PAGE HEADER
+================================*/
+
+.page-header{
+    position: relative;
+    padding: 90px 0;
+    color: #fff;
+}
+
+.page-header__inner{
+    text-align:left;
+}
+
+
+/* Background Image */
+.page-header__bg{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #131222;
+    background-size: cover;
+    background-position: center;
+    z-index:-1;
+}
+
+/* Content */
+.page-header__inner h3{
+    font-size:38px;
+    color:white;
+    font-weight:700;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+/* Breadcrumb */
+
+.thm-breadcrumb{
+    display:flex;
+    justify-content:flex-start;
+    gap:8px;
+}
+
+.thm-breadcrumb li{
+    font-size:15px;
+}
+
+.thm-breadcrumb li a{
+    color:#ddd;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.thm-breadcrumb li a:hover{
+    color:#fff;
+}
+
+/* ===============================
+   RESPONSIVE
+================================*/
+
+@media (max-width:768px){
+
+.page-header{
+    padding:70px 0;
+}
+
+.page-header__inner h3{
+    font-size:28px;
+}
+
+}
+/* ===============================
+   PAGE HEADER END
+================================*/
+    </style>
+</head>
+        <!--Page Header Start -->
+        <section class="page-header">
+            <div class="page-header__bg" style="background-image: url(static/assets/images/backgrounds/page-header-bg.jpg);">
+            </div>
+            <div class="page-header__shape-1"></div>
+            <div class="container">
+                <div class="page-header__inner">
+                    <h3>Checkout</h3>
+                    <div class="thm-breadcrumb__inner">
+                        <ul class="thm-breadcrumb list-unstyled">
+                            <li><a href="/">Home</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--Page Header End -->
+
+
+<div class="container mt-5">
+
+
+    <form method="POST" action = "{% url 'placeorder' %}">
+    {% csrf_token %}
+
+    <div class="row">
+
+    <div class="col-md-6">
+
+    <div class="mb-3">
+        <label>Full Name</label>
+        <input type="text"
+       class="form-control"
+       name="full_name"
+       placeholder="Full Name"
+       pattern="[A-Za-z ]+"
+       title="Only letters allowed"
+       required>
+    </div>
+
+    <div class="mb-3">
+        <label>Phone</label>
+            <input type="tel"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+       class="form-control"
+       name="phone"
+       maxlength="10"
+       placeholder="your number"
+       required>
+    </div>
+
+    <div class="mb-3">
+        <label>Address</label>
+        <textarea name="address" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>City</label>
+         <input class="form-control mb-2"
+       name="city"
+       placeholder="City"
+       pattern="[A-Za-z ]+"
+       required>
+    </div>
+
+    <div class="mb-3">
+        <label>Pincode</label>
+        <input class="form-control mb-2"
+       name="pincode"
+       placeholder="Pincode"
+       maxlength="6"
+       pattern="[0-9]{6}"
+       oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+       required>
+    </div>
+
+    <div class="mb-3">
+        <label>Payment Method</label>
+        <select name="payment_method" class="form-select" required>
+            <option value="">Select Payment</option>
+            <option value="COD">Cash On Delivery</option>
+            <option value="Online">Online Payment</option>
+        </select>
+    </div>
+
+    </div>
+
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h4>Order Summary</h4>
+            <hr>
+            <h5>Total Amount:₹ {{ grand_total|floatformat:2 }}</h5>
+
+            <button type="submit" class="btn btn-success w-100 mt-3">Confirm Order</button>
+        </div>
+    </div>
+
+</div>
+
+</form>
+
+</div>
+
+{% endblock %}

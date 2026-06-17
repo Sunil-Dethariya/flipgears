@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+<!-- Mirrored from dreamlayout.mnsithub.com/html/gorent/main-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Oct 2025 06:02:02 GMT -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> {% block title %}FlipGears{% endblock %}</title>
+    <!-- favicons Icons -->
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/lucide.css' %}">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/favicons/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/favicons/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/favicons/favicon-16x16.png' %}" />
+    <link rel="manifest" href="{% static 'assets/images/favicons/site.webmanifest" />
+    <meta name="description" content="Gorent HTML 5 Template " />
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        rel="stylesheet">
+
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&amp;family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/custom-animate.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/swiper.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/font-awesome-all.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/jarallax.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/jquery.magnific-popup.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/owl.theme.default.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/jquery-ui.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/aos.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/odometer.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/timePicker.css' %}" />
+
+
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/slider.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/sliding-text.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/services.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/about.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/booking.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/counter.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/listing.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/video.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/pricing.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/popular-car.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/testimonial.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/faq.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/team.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/call.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/download-app.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/brand.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/blog.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/lets-talk.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/process.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/why-choose.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/module-css/gallery.css' %}" />
+
+    <!-- user css -->
+    <link rel="stylesheet" href="{% static 'assets/css/user/add_request.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/user/view_request.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/user/profile.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/user/profile-page.css' %}" />
+
+
+
+
+    <!-- template styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" />
+
+<style>
+    /* Full screen preloader */
+.loader {
+    position: fixed;
+    inset: 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Letters */
+.loader span {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #00CFE0;
+    letter-spacing: 2px;
+    animation: flipPulse 1.4s forwards;
+}
+
+/* Delay animation letter by letter */
+.loader span:nth-child(1) { animation-delay: 0s; }
+.loader span:nth-child(2) { animation-delay: 0.1s; }
+.loader span:nth-child(3) { animation-delay: 0.2s; }
+.loader span:nth-child(4) { animation-delay: 0.3s; }
+.loader span:nth-child(5) { animation-delay: 0.4s; color:#131222; }
+.loader span:nth-child(6) { animation-delay: 0.5s; }
+.loader span:nth-child(7) { animation-delay: 0.6s; }
+.loader span:nth-child(8) { animation-delay: 0.7s; }
+.loader span:nth-child(9) { animation-delay: 0.8s; }
+
+@keyframes flipPulse {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 1;                 /* 🔥 FULL visible */
+        transform: translateY(0);   /* 🔥 no lift */
+    }
+}
+
+
+</style>
+
+</head>
+
+<body class="custom-cursor">
+
+    <div class="custom-cursor__cursor"></div>
+    <div class="custom-cursor__cursor-two"></div>
+
+    <!--Start Preloader-->
+   <div id="preloader" class="loader">
+    <span>F</span>
+    <span>l</span>
+    <span>i</span>
+    <span>p</span>
+    <span>G</span>
+    <span>e</span>
+    <span>a</span>
+    <span>r</span>
+    <span>s</span>
+</div>
+    <!--End Preloader-->
+    <div class="page-wrapper">
+        <header class="main-header">
+            <div class="main-menu__top">
+                <div class="main-menu__top-inner">
+                    <ul class="list-unstyled main-menu__contact-list">
+                        <li>
+
+                            <div class="text">
+                                <p>Buy • Sell • Repair Electronics — All in One Place</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="main-menu__top-right">
+                        <div class="main-menu__social">
+                            <a href="#"><i class="icon-facebook"></i></a>
+                            <a href="#"><i class="icon-twitter"></i></a>
+                            <a href="#"><i class="icon-instagram"></i></a>
+                            <a href="#"><i class="icon-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="main-menu">
+                <div class="main-menu__wrapper">
+                    <div class="main-menu__wrapper-inner">
+                        <div class="main-menu__left">
+                            <div class="main-menu__logo">
+                                <div class="section-title__tagline-shape-demo">
+                                    <img src="{% static 'assets/images/removelogomain.png' %}" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-menu__middle-box">
+                            <div class="main-menu__main-menu-box">
+                                <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
+                                <ul class="main-menu__list">
+                                    <li class="{% if request.resolver_match.url_name == 'seller' %}current{% endif %}">
+                                        <a href="{% url 'seller' %}">Home</a>
+                                    </li>
+                                    <li class="dropdown {% if request.resolver_match.url_name in 'add_product manage_product' %}current{% endif %}">
+                                            <a href="#">Product</a>
+                                            <ul class="shadow-box">
+                                                <li><a href="{% url 'add_product' %}">Add Product</a></li>
+                                                <li><a href="{% url 'manage_product' %}">Manage Product</a></li>
+                                            </ul>
+                                    </li>
+
+                                    <li class="{% if request.resolver_match.url_name == 'manage_order' %}current{% endif %}">
+                                        <a href="{% url 'manage_order' %}">Manage Order</a>
+                                    </li>
+                                    <li class="{% if request.resolver_match.url_name == 'view_feedback' %}current{% endif %}">
+                                        <a href="{% url 'view_feedback' %}">View Feedback</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                            <div class="main-menu__search-cart-box">
+                                <div class="nav-profile">
+  <div class="dropdown-profile">
+      <div class="dropdown-profile-css">
+    <a href="#" class="dropdown-toggle">
+      <i class="fa fa-user">    </i>
+  {% if request.session.log_id %}
+        {{ request.session.log_name }}
+      {% else %}
+        Login
+      {% endif %}
+    </a>
+          </div>
+<div class="dropdown-menu">
+  {% if request.session.log_id %}
+    <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+    <a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a>
+
+  {% else %}
+    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+    <a class="dropdown-item" href="{% url 'register' %}">Sign Up</a>
+  {% endif %}
+</div>
+
+  </div>
+</div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+
+                <div class="stricky-header stricked-menu main-menu">
+                    <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
+                </div><!-- /.stricky-header -->
+
+
+{% if messages %}
+<div class="position-fixed top-0 end-0 p-3" style="z-index:9999">
+    {% for message in messages %}
+    <div class="toast show align-items-center text-white bg-success border-0 mb-2">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.toast').forEach(el => el.remove());
+    }, 3000); // 3 sec me hide
+</script>
+{% endif %}
+
+        <!-- MAIN CONTENT -->
+        {% block content %}
+        <!-- yaha child page ka content aayega -->
+        {% endblock %}
+
+        <!--Site Footer Start-->
+        <footer class="site-footer">
+            <div class="site-footer__bg">
+            </div>
+            <div class="site-footer__top">
+                <div class="container">
+                    <div class="site-footer__top-inner">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
+                                <div class="footer-widget__about">
+                                    <div class="footer-widget__about-logo">
+                                        <a href="index.html"><img src="{% static 'assets/images/removelogomain.png' %}"
+                                                alt=""></a>
+                                    </div>
+                                    <p class="footer-widget__about-text"></p>
+                                    <form class="footer-widget__form">
+                                        <div class="footer-widget__input">
+                                            <input type="email" placeholder="Your Email">
+                                        </div>
+                                        <button type="submit" class="footer-widget__btn"><i
+                                                class="icon-right-arrow"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                                <div class="footer-widget__contact">
+                                    <h3 class="footer-widget__title">Contact Us</h3>
+                                    <ul class="footer-widget__contact-list list-unstyled">
+                                        <li>
+                                            <div class="icon">
+                                                <span class="icon-pin"></span>
+                                            </div>
+                                            <p>Ratnakar Paristine, Vastrapur
+                                                <br> Ahemdabad 380006</p>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <span class="icon-call"></span>
+                                            </div>
+                                            <p><a href="tel:6352182539">+91 6352182539</a></p>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <span class="icon-envelope"></span>
+                                            </div>
+                                            <p><a href="mailto:sunilahir9830@gmail.com">sunilahir9830@gmail.com</a></p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="site-footer__bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="site-footer__bottom-inner">
+                                <div class="site-footer__copyright">
+                                    <p class="site-footer__copyright-text">© 2025 FlipGears By All
+                                        Rights
+                                        Reserved.</p>
+                                </div>
+                                <div class="site-footer__bottom-menu-box">
+                                    <ul class="list-unstyled site-footer__bottom-menu">
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!--Site Footer End-->
+
+
+
+
+    </div><!-- /.page-wrapper -->
+
+
+    <div class="mobile-nav__wrapper">
+        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
+        <!-- /.mobile-nav__overlay -->
+        <div class="mobile-nav__content">
+            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
+            <div class="logo-box">
+                <a href="/" aria-label="logo image"><img src="{% static 'assets/images/removelogomain.png' %}" width="140"
+                        alt="" /></a>
+            </div>
+            <!-- /.logo-box -->
+            <div class="mobile-nav__container"></div>
+            <!-- /.mobile-nav__container -->
+
+            <ul class="mobile-nav__contact list-unstyled">
+                <li>
+                    <i class="fa fa-envelope"></i>
+                    <a href="mailto:needhelp@flipgears.com">needhelp@flipgears.com</a>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:6352182539">+91 6352182539</a>
+                </li>
+            </ul><!-- /.mobile-nav__contact -->
+            <div class="mobile-nav__top">
+                <div class="mobile-nav__social">
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-facebook-square"></a>
+                    <a href="#" class="fab fa-pinterest-p"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                </div><!-- /.mobile-nav__social -->
+            </div><!-- /.mobile-nav__top -->
+
+
+
+        </div>
+        <!-- /.mobile-nav__content -->
+    </div>
+    <!-- /.mobile-nav__wrapper -->
+
+    <div class="search-popup">
+        <div class="search-popup__overlay search-toggler"></div>
+        <!-- /.search-popup__overlay -->
+        <div class="search-popup__content">
+            <form action="#">
+                <label for="search" class="sr-only">search here</label><!-- /.sr-only -->
+                <input type="text" id="search" placeholder="Search Here..." />
+                <button type="submit" aria-label="search submit" class="thm-btn">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        <!-- /.search-popup__content -->
+    </div>
+    <!-- /.search-popup -->
+
+    <a href="#" data-target="html" class="scroll-to-target scroll-to-top">
+        <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
+        <span class="scroll-to-top__text"> Go Back Top</span>
+    </a>
+
+
+    <script src="{% static 'assets/js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jarallax.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.appear.min.js' %}"></script>
+    <script src="{% static 'assets/js/swiper.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.circle-progress.min.js' %}"></script>
+    <script src="{% static 'assets/js/knob.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'assets/js/wNumb.min.js' %}"></script>
+    <script src="{% static 'assets/js/wow.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-sidebar-content.js' %}"></script>
+    <script src="{% static 'assets/js/gsap/gsap.js' %}"></script>
+    <script src="{% static 'assets/js/gsap/ScrollTrigger.js' %}"></script>
+    <script src="{% static 'assets/js/gsap/SplitText.js' %}"></script>
+    <script src="{% static 'assets/js/marquee.min.js' %}"></script>
+    <script src="{% static 'assets/js/odometer.min.js' %}"></script>
+    <script src="{% static 'assets/js/timePicker.js' %}"></script>
+    <script src="{% static 'assets/js/typed-2.0.11.js' %}"></script>
+    <script src="{% static 'assets/js/aos.js' %}"></script>
+
+    <!-- user js -->
+    <script src="{% static 'assets/js/user/add_request.js' %}"></script>
+    <script src="{% static 'assets/js/user/profile-page.js' %}"></script>
+
+
+
+    <!-- template js -->
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+<script>
+window.addEventListener("load", function () {
+    const preloader = document.getElementById("preloader");
+    const letters = preloader.querySelectorAll("span");
+    const lastLetter = letters[letters.length - 1]; // last = s
+
+    lastLetter.addEventListener("animationend", () => {
+        preloader.style.display = "none"; // 🔥 direct remove
+    });
+});
+</script>
+
+<!-- Mirrored from dreamlayout.mnsithub.com/html/gorent/main-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 27 Oct 2025 06:02:52 GMT -->
+</html>
