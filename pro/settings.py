@@ -25,8 +25,11 @@ SECRET_KEY = 'django-insecure-d)47y=o*^ppe5z1$^#add0jaesi9ts(+%bbq=q8x$=p%2vt5^j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    "flipgears.onrender.com",
+    "127.0.0.1",
+    "localhost",
+]
 
 
 
